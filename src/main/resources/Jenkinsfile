@@ -1,0 +1,13 @@
+node {
+
+    stage('Compile (test) sources, test and generate jar.') {
+        sh './gradlew build'
+    }
+
+    stage ('Publish to maven repository.') {
+        if (currentBuild.result == 'SUCCESS') {
+            sh 'make publish'
+        }
+    }
+
+}

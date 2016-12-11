@@ -1,0 +1,12 @@
+---
+connector:
+  ldap:
+    - uid
+    - iWelcomeAccountName
+    - mail
+    - iWelcomePrivateEmail
+    - iplanet-am-user-success-url
+    - iWelcomeAuthAttr10
+    - cn
+    - sn
+    - givenName

@@ -1,0 +1,29 @@
+apply plugin: 'maven-publish'
+
+def nexusUser = project.hasProperty('nexus_user') ? nexus_user : System.getenv()['NEXUS_USER']
+def nexusPassword = project.hasProperty('nexus_user') ? nexus_user : System.getenv()['NEXUS_PASSWORD']
+def nexusHost = project.hasProperty('nexus_host') ? nexus_host : System.getenv()['NEXUS_HOST']
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId 'com.vorstdev.provisioning'
+            artifactId 'connector-manager'
+            version '0.1-SNAPSHOT'
+
+            from components.java
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            credentials {
+                username nexusUser
+                password nexusPassword
+            }
+            url nexusHost + "/nexus/content/repositories/snapshots"
+        }
+    }
+}
